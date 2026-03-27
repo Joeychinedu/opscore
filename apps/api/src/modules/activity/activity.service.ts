@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../common/prisma/prisma.service.js';
-import { PaginationDto, paginationMeta } from '../../common/dto/pagination.dto.js';
+import { PaginationDto, paginationMeta, parsePagination } from '../../common/dto/pagination.dto.js';
 
 @Injectable()
 export class ActivityService {
@@ -10,8 +10,8 @@ export class ActivityService {
     orgId: string,
     query: PaginationDto & { entity?: string; action?: string },
   ) {
-    const { page, limit, entity, action } = query;
-    const skip = (page - 1) * limit;
+    const { page, limit, skip, sortBy, sortOrder } = parsePagination(query);
+    const { entity, action } = query;
 
     const where: any = { orgId };
 
@@ -28,7 +28,7 @@ export class ActivityService {
         where,
         skip,
         take: limit,
-        orderBy: { createdAt: 'desc' },
+        orderBy: { [sortBy]: sortOrder },
         include: {
           user: { select: { id: true, firstName: true, lastName: true } },
         },

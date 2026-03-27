@@ -23,6 +23,16 @@ export class PaginationDto {
   sortOrder: 'asc' | 'desc' = 'desc';
 }
 
+/** Parse pagination params with safe integer coercion */
+export function parsePagination(query: PaginationDto) {
+  const page = Math.max(1, Number(query.page) || 1);
+  const limit = Math.max(1, Math.min(100, Number(query.limit) || 20));
+  const skip = (page - 1) * limit;
+  const sortBy = query.sortBy || 'createdAt';
+  const sortOrder = query.sortOrder || 'desc';
+  return { page, limit, skip, sortBy, sortOrder };
+}
+
 export function paginationMeta(
   total: number,
   page: number,

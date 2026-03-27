@@ -6,7 +6,7 @@ import {
 import { PrismaService } from '../../common/prisma/prisma.service.js';
 import { CreateInvoiceDto } from './dto/create-invoice.dto.js';
 import { UpdateInvoiceDto } from './dto/update-invoice.dto.js';
-import { PaginationDto, paginationMeta } from '../../common/dto/pagination.dto.js';
+import { PaginationDto, paginationMeta, parsePagination } from '../../common/dto/pagination.dto.js';
 
 @Injectable()
 export class InvoicesService {
@@ -16,8 +16,8 @@ export class InvoicesService {
     orgId: string,
     query: PaginationDto & { status?: string; clientId?: string },
   ) {
-    const { page, limit, sortBy, sortOrder, status, clientId } = query;
-    const skip = (page - 1) * limit;
+    const { page, limit, skip, sortBy, sortOrder } = parsePagination(query);
+    const { status, clientId } = query;
 
     const where: any = { orgId };
 
@@ -34,7 +34,7 @@ export class InvoicesService {
         where,
         skip,
         take: limit,
-        orderBy: { [sortBy || 'createdAt']: sortOrder },
+        orderBy: { [sortBy]: sortOrder },
         include: {
           client: { select: { id: true, name: true } },
           lineItems: true,

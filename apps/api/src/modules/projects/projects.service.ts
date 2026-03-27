@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../common/prisma/prisma.service.js';
 import { CreateProjectDto } from './dto/create-project.dto.js';
 import { UpdateProjectDto } from './dto/update-project.dto.js';
-import { PaginationDto, paginationMeta } from '../../common/dto/pagination.dto.js';
+import { PaginationDto, paginationMeta, parsePagination } from '../../common/dto/pagination.dto.js';
 
 @Injectable()
 export class ProjectsService {
@@ -12,8 +12,8 @@ export class ProjectsService {
     orgId: string,
     query: PaginationDto & { search?: string; status?: string; clientId?: string },
   ) {
-    const { page, limit, sortBy, sortOrder, search, status, clientId } = query;
-    const skip = (page - 1) * limit;
+    const { page, limit, skip, sortBy, sortOrder } = parsePagination(query);
+    const { search, status, clientId } = query;
 
     const where: any = { orgId };
 
@@ -37,7 +37,7 @@ export class ProjectsService {
         where,
         skip,
         take: limit,
-        orderBy: { [sortBy || 'createdAt']: sortOrder },
+        orderBy: { [sortBy]: sortOrder },
         include: {
           client: { select: { id: true, name: true } },
           _count: {
