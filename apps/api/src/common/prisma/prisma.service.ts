@@ -1,24 +1,17 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { PrismaClient } from '../../../generated/prisma/client.js';
 import { PrismaPg } from '@prisma/adapter-pg';
+import 'dotenv/config';
 
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
-
-// In Prisma 7, PrismaClient requires an adapter and is not easily subclassed.
-// We create an instance and re-export it as the injectable service via a Proxy
-// so that all model accessors (e.g. prisma.user) work transparently.
-function createPrismaClient() {
-  return new PrismaClient({ adapter });
-}
-
-type PrismaClientInstance = ReturnType<typeof createPrismaClient>;
+type PrismaClientInstance = InstanceType<typeof PrismaClient>;
 
 @Injectable()
 export class PrismaService implements OnModuleInit, OnModuleDestroy {
   private _prisma: PrismaClientInstance;
 
   constructor() {
-    this._prisma = createPrismaClient();
+    const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
+    this._prisma = new PrismaClient({ adapter });
 
     // Return a proxy so that property access (e.g. this.user, this.organization)
     // is forwarded to the underlying PrismaClient instance.
