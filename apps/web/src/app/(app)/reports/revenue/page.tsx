@@ -66,7 +66,7 @@ export default function RevenueReportPage() {
             type="date"
             value={from}
             onChange={(e) => setFrom(e.target.value)}
-            className="rounded-lg border border-gray-300 bg-white py-2 px-3 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
           />
         </div>
         <div>
@@ -76,13 +76,13 @@ export default function RevenueReportPage() {
             type="date"
             value={to}
             onChange={(e) => setTo(e.target.value)}
-            className="rounded-lg border border-gray-300 bg-white py-2 px-3 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
           />
         </div>
       </div>
 
       {error && (
-        <div className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
+        <div className="mb-4 bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>
       )}
 
       {loading ? (
@@ -97,7 +97,7 @@ export default function RevenueReportPage() {
           </div>
 
           {/* Area Chart */}
-          <div className="rounded-lg border bg-white p-5">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
             <h3 className="text-sm font-medium text-gray-900 mb-4">Monthly Revenue</h3>
             {data.monthlyRevenue.length > 0 ? (
               <ResponsiveContainer width="100%" height={300}>

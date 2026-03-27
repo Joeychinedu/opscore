@@ -44,7 +44,7 @@ export default function TeamReportPage() {
   }, []);
 
   if (loading) return <DashboardSkeleton />;
-  if (error) return <div className="rounded-md bg-red-50 p-4 text-sm text-red-700">{error}</div>;
+  if (error) return <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>;
   if (!data) return null;
 
   const chartData = data.members.map((m) => ({
@@ -63,7 +63,7 @@ export default function TeamReportPage() {
       ) : (
         <>
           {/* Bar Chart */}
-          <div className="rounded-lg border bg-white p-5 mb-6">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6 mb-6">
             <h3 className="text-sm font-medium text-gray-900 mb-4">Tasks by Team Member</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={chartData}>
@@ -79,9 +79,9 @@ export default function TeamReportPage() {
           </div>
 
           {/* Table */}
-          <div className="rounded-lg border bg-white overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] overflow-hidden">
+            <table className="min-w-full divide-y divide-gray-100">
+              <thead className="bg-gray-50/80">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Member</th>
                   <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Assigned</th>
@@ -89,9 +89,9 @@ export default function TeamReportPage() {
                   <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">In Progress</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-100">
                 {data.members.map((m) => (
-                  <tr key={m.userId} className="hover:bg-gray-50">
+                  <tr key={m.userId} className="hover:bg-gray-50/50">
                     <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">
                       {m.firstName} {m.lastName}
                     </td>

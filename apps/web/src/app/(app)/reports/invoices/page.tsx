@@ -58,7 +58,7 @@ export default function InvoiceReportPage() {
   }, []);
 
   if (loading) return <DashboardSkeleton />;
-  if (error) return <div className="rounded-md bg-red-50 p-4 text-sm text-red-700">{error}</div>;
+  if (error) return <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>;
   if (!data) return null;
 
   const statusBarData = data.byStatus.map((s) => ({
@@ -79,7 +79,7 @@ export default function InvoiceReportPage() {
       </div>
 
       {/* Bar Chart */}
-      <div className="rounded-lg border bg-white p-5 mb-6">
+      <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6 mb-6">
         <h3 className="text-sm font-medium text-gray-900 mb-4">Invoices by Status</h3>
         {statusBarData.length > 0 ? (
           <ResponsiveContainer width="100%" height={300}>
@@ -101,9 +101,9 @@ export default function InvoiceReportPage() {
       </div>
 
       {/* Recent Invoices Table */}
-      <div className="rounded-lg border bg-white overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-100">
+          <thead className="bg-gray-50/80">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Invoice</th>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Client</th>
@@ -112,9 +112,9 @@ export default function InvoiceReportPage() {
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Due Date</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-100">
             {data.recentInvoices.map((inv) => (
-              <tr key={inv.id} className="hover:bg-gray-50">
+              <tr key={inv.id} className="hover:bg-gray-50/50">
                 <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">{inv.invoiceNumber}</td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{inv.client?.name || '-'}</td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900">{formatCurrency(inv.amount)}</td>

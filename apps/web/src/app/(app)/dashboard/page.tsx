@@ -94,7 +94,7 @@ export default function DashboardPage() {
 
   if (error) {
     return (
-      <div className="rounded-md bg-red-50 p-4 text-sm text-red-700">{error}</div>
+      <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>
     );
   }
 
@@ -128,7 +128,7 @@ export default function DashboardPage() {
       {/* Charts Row */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 mb-6">
         {/* Tasks by Status - Pie Chart */}
-        <div className="rounded-lg border bg-white p-5">
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
           <h3 className="text-sm font-medium text-gray-900 mb-4">Tasks by Status</h3>
           {tasksPieData.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
@@ -157,7 +157,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Invoice Summary - Bar Chart */}
-        <div className="rounded-lg border bg-white p-5">
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
           <h3 className="text-sm font-medium text-gray-900 mb-4">Invoice Summary</h3>
           {invoiceBarData.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
@@ -182,19 +182,19 @@ export default function DashboardPage() {
       {/* Bottom Row: Upcoming Tasks + Recent Activity */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Upcoming Tasks */}
-        <div className="rounded-lg border bg-white p-5">
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-gray-900">Upcoming Tasks</h3>
-            <Link href="/tasks" className="text-xs text-blue-600 hover:text-blue-500 flex items-center gap-1">
+            <Link href="/tasks" className="text-xs text-blue-500 hover:text-blue-600 font-medium flex items-center gap-1">
               View all <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
           {data.upcomingTasks.length > 0 ? (
             <div className="space-y-3">
               {data.upcomingTasks.map((task) => (
-                <div key={task.id} className="flex items-start justify-between gap-3">
+                <div key={task.id} className="flex items-start justify-between gap-3 hover:bg-gray-50/50 rounded-lg p-2 -mx-2 transition-colors">
                   <div className="min-w-0 flex-1">
-                    <Link href={`/tasks/${task.id}`} className="text-sm font-medium text-gray-900 hover:text-blue-600 truncate block">
+                    <Link href={`/tasks/${task.id}`} className="text-sm font-medium text-gray-900 hover:text-blue-500 truncate block">
                       {task.title}
                     </Link>
                     {task.project && (
@@ -219,17 +219,17 @@ export default function DashboardPage() {
         </div>
 
         {/* Recent Activity */}
-        <div className="rounded-lg border bg-white p-5">
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-gray-900">Recent Activity</h3>
-            <Link href="/team/activity" className="text-xs text-blue-600 hover:text-blue-500 flex items-center gap-1">
+            <Link href="/team/activity" className="text-xs text-blue-500 hover:text-blue-600 font-medium flex items-center gap-1">
               View all <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
           {data.recentActivity.length > 0 ? (
             <div className="space-y-3">
               {data.recentActivity.map((activity) => (
-                <div key={activity.id} className="flex items-start gap-3 border-l-2 border-blue-200 pl-3">
+                <div key={activity.id} className="flex items-start gap-3 border-l-2 border-blue-200 pl-3 hover:bg-gray-50/50 rounded-r-lg transition-colors">
                   <div className="min-w-0 flex-1">
                     <p className="text-sm text-gray-900">
                       <span className="font-medium">{activity.user.firstName} {activity.user.lastName}</span>{' '}

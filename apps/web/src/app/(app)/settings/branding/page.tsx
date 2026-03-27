@@ -66,9 +66,9 @@ export default function BrandingPage() {
       {loading ? (
         <div className="text-sm text-gray-400">Loading settings...</div>
       ) : (
-        <form onSubmit={handleSave} className="max-w-lg space-y-5">
+        <form onSubmit={handleSave} className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6 max-w-lg space-y-5">
           {error && (
-            <div className="rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
+            <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>
           )}
           {success && (
             <div className="rounded-md bg-green-50 p-3 text-sm text-green-700">Branding saved successfully.</div>
@@ -84,12 +84,12 @@ export default function BrandingPage() {
                 type="text"
                 value={brandColor}
                 onChange={(e) => setBrandColor(e.target.value)}
-                className="flex-1 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="flex-1 border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
                 placeholder="#4F46E5"
               />
               {brandColor && (
                 <div
-                  className="h-9 w-9 rounded-lg border border-gray-300"
+                  className="h-9 w-9 rounded-2xl border border-gray-200 shadow-sm"
                   style={{ backgroundColor: brandColor }}
                 />
               )}
@@ -106,7 +106,7 @@ export default function BrandingPage() {
               type="text"
               value={logoUrl}
               onChange={(e) => setLogoUrl(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
               placeholder="https://example.com/logo.png"
             />
             <p className="mt-1 text-xs text-gray-500">Logo upload coming soon. Enter a URL for now.</p>
@@ -115,7 +115,7 @@ export default function BrandingPage() {
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+            className="inline-flex items-center gap-2 bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
           >
             {saving ? 'Saving...' : 'Save Changes'}
           </button>

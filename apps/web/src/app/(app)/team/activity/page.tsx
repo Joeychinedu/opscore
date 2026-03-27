@@ -88,7 +88,7 @@ export default function ActivityPage() {
         <select
           value={entityFilter}
           onChange={(e) => setEntityFilter(e.target.value)}
-          className="rounded-lg border border-gray-300 bg-white py-2 px-3 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
         >
           <option value="">All Entities</option>
           <option value="Client">Client</option>
@@ -99,7 +99,7 @@ export default function ActivityPage() {
       </div>
 
       {error && (
-        <div className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
+        <div className="mb-4 bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>
       )}
 
       {loading ? (
@@ -112,14 +112,14 @@ export default function ActivityPage() {
         />
       ) : (
         <>
-          <div className="rounded-lg border bg-white">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03]">
             <div className="divide-y divide-gray-100">
               {entries.map((entry) => (
                 <div
                   key={entry.id}
                   className={`flex items-start gap-4 p-4 border-l-4 ${ENTITY_COLORS[entry.entity] || 'border-gray-300'}`}
                 >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xs font-medium text-gray-600">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-medium text-blue-600">
                     {entry.user.firstName[0]}{entry.user.lastName[0]}
                   </div>
                   <div className="min-w-0 flex-1">
@@ -149,14 +149,14 @@ export default function ActivityPage() {
                 <button
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+                  className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
                 >
                   Previous
                 </button>
                 <button
                   onClick={() => setPage((p) => Math.min(meta.totalPages, p + 1))}
                   disabled={page === meta.totalPages}
-                  className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+                  className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
                 >
                   Next
                 </button>

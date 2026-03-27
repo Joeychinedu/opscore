@@ -37,11 +37,11 @@ export default function SelectOrgPage() {
         </div>
 
         {orgs.length === 0 ? (
-          <div className="rounded-lg border border-gray-200 bg-white p-8 text-center shadow-sm">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-8 text-center">
             <p className="text-gray-600">No workspaces yet.</p>
             <Link
               href="/create-org"
-              className="mt-4 inline-block rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+              className="mt-4 inline-block bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all"
             >
               Create workspace
             </Link>
@@ -52,7 +52,7 @@ export default function SelectOrgPage() {
               <button
                 key={org.id}
                 onClick={() => handleSelect(org)}
-                className="w-full rounded-lg border border-gray-200 bg-white p-4 text-left shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-50"
+                className="w-full bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-4 text-left transition-all hover:border-blue-300 hover:shadow-xl border border-transparent"
               >
                 <div className="font-medium text-gray-900">{org.name}</div>
                 <div className="text-sm text-gray-500">{org.slug}</div>
@@ -61,7 +61,7 @@ export default function SelectOrgPage() {
             <div className="pt-2 text-center">
               <Link
                 href="/create-org"
-                className="text-sm font-medium text-blue-600 hover:text-blue-500"
+                className="text-sm text-blue-500 hover:text-blue-600 font-medium"
               >
                 Create a new workspace
               </Link>

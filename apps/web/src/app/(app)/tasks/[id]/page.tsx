@@ -85,7 +85,7 @@ export default function TaskDetailPage() {
     return (
       <div>
         <PageHeader title="Task" />
-        <div className="rounded-md bg-red-50 p-4 text-sm text-red-700">
+        <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">
           {error || 'Task not found'}
         </div>
       </div>
@@ -101,7 +101,7 @@ export default function TaskDetailPage() {
             <StatusBadge status={task.priority} />
             <Link
               href={`/tasks/${task.id}/edit`}
-              className="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="inline-flex items-center gap-2 bg-white text-gray-700 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:bg-gray-50"
             >
               <Pencil className="h-4 w-4" />
               Edit
@@ -111,7 +111,7 @@ export default function TaskDetailPage() {
       />
 
       {/* Quick status update */}
-      <div className="mb-6 rounded-lg border bg-white p-4">
+      <div className="mb-6 bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-4">
         <h3 className="mb-3 text-sm font-medium text-gray-700">Status</h3>
         <div className="flex flex-wrap gap-2">
           {STATUS_FLOW.map((status) => (
@@ -119,10 +119,10 @@ export default function TaskDetailPage() {
               key={status}
               onClick={() => handleStatusChange(status)}
               disabled={updatingStatus || task.status === status}
-              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 ${
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-all disabled:opacity-50 ${
                 task.status === status
-                  ? 'bg-gray-900 text-white'
-                  : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  ? 'bg-gradient-to-t from-blue-600 to-blue-500 text-white shadow-sm'
+                  : 'border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-blue-200'
               }`}
             >
               {status.replace(/_/g, ' ')}
@@ -132,7 +132,7 @@ export default function TaskDetailPage() {
       </div>
 
       {/* Task info */}
-      <div className="rounded-lg border bg-white p-6">
+      <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
         <h2 className="mb-4 text-sm font-semibold text-gray-900">Task Details</h2>
         <dl className="grid gap-6 sm:grid-cols-2">
           <div className="flex items-start gap-3">
@@ -141,7 +141,7 @@ export default function TaskDetailPage() {
               <dt className="text-xs font-medium uppercase text-gray-400">Project</dt>
               <dd className="mt-1 text-sm text-gray-700">
                 {task.project ? (
-                  <Link href={`/projects/${task.project.id}`} className="text-blue-600 hover:text-blue-500">
+                  <Link href={`/projects/${task.project.id}`} className="text-blue-500 hover:text-blue-600 font-medium">
                     {task.project.name}
                   </Link>
                 ) : (

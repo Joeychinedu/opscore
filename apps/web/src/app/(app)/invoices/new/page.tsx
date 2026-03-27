@@ -138,25 +138,25 @@ export default function NewInvoicePage() {
   };
 
   const inputClass =
-    'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500';
+    'w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none placeholder-gray-400';
   const compactInputClass =
-    'w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500';
+    'w-full border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none placeholder-gray-400';
 
   return (
     <div>
       <PageHeader title="New Invoice" description="Create a new invoice with line items" />
 
       {error && (
-        <div className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
+        <div className="mb-4 bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Invoice Details */}
-        <div className="rounded-lg border bg-white p-6">
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
           <h2 className="mb-4 text-sm font-semibold text-gray-900">Invoice Details</h2>
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
-              <label htmlFor="clientId" className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="clientId" className="mb-1.5 block text-sm font-medium text-gray-700">
                 Client <span className="text-red-500">*</span>
               </label>
               <select
@@ -177,7 +177,7 @@ export default function NewInvoicePage() {
             </div>
 
             <div>
-              <label htmlFor="projectId" className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="projectId" className="mb-1.5 block text-sm font-medium text-gray-700">
                 Project
               </label>
               <select
@@ -203,7 +203,7 @@ export default function NewInvoicePage() {
             </div>
 
             <div>
-              <label htmlFor="dueDate" className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="dueDate" className="mb-1.5 block text-sm font-medium text-gray-700">
                 Due Date <span className="text-red-500">*</span>
               </label>
               <input
@@ -217,7 +217,7 @@ export default function NewInvoicePage() {
             </div>
 
             <div>
-              <label htmlFor="taxRate" className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="taxRate" className="mb-1.5 block text-sm font-medium text-gray-700">
                 Tax Rate (%)
               </label>
               <input
@@ -234,7 +234,7 @@ export default function NewInvoicePage() {
             </div>
 
             <div className="sm:col-span-2">
-              <label htmlFor="notes" className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="notes" className="mb-1.5 block text-sm font-medium text-gray-700">
                 Notes
               </label>
               <textarea
@@ -250,22 +250,22 @@ export default function NewInvoicePage() {
         </div>
 
         {/* Line Items */}
-        <div className="rounded-lg border bg-white p-6">
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-sm font-semibold text-gray-900">Line Items</h2>
             <button
               type="button"
               onClick={addLineItem}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="inline-flex items-center gap-1.5 bg-white text-gray-700 border border-gray-200 rounded-lg px-3 py-1.5 text-sm font-medium shadow-sm hover:bg-gray-50"
             >
               <Plus className="h-4 w-4" />
               Add Line Item
             </button>
           </div>
 
-          <div className="overflow-hidden rounded-md border">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+          <div className="overflow-hidden rounded-xl border border-gray-100">
+            <table className="min-w-full divide-y divide-gray-100">
+              <thead className="bg-gray-50/80">
                 <tr>
                   <th className="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">Description</th>
                   <th className="w-24 px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">Qty</th>
@@ -274,7 +274,7 @@ export default function NewInvoicePage() {
                   <th className="w-12 px-3 py-2" />
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-100">
                 {lineItems.map((item, index) => {
                   const amount = item.quantity * item.unitPrice;
                   return (
@@ -359,13 +359,13 @@ export default function NewInvoicePage() {
           <button
             type="submit"
             disabled={submitting}
-            className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+            className="bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
           >
             {submitting ? 'Creating...' : 'Create Invoice'}
           </button>
           <Link
             href="/invoices"
-            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="bg-white text-gray-700 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:bg-gray-50"
           >
             Cancel
           </Link>

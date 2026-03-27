@@ -65,9 +65,9 @@ export default function AccountPage() {
       <PageHeader title="Settings" description="Manage your workspace settings" />
       <SettingsTabs />
 
-      <form onSubmit={handleSave} className="max-w-lg space-y-5">
+      <form onSubmit={handleSave} className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6 max-w-lg space-y-5">
         {error && (
-          <div className="rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
+          <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>
         )}
         {success && (
           <div className="rounded-md bg-green-50 p-3 text-sm text-green-700">Account updated successfully.</div>
@@ -86,7 +86,7 @@ export default function AccountPage() {
               maxLength={50}
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
             />
           </div>
 
@@ -100,7 +100,7 @@ export default function AccountPage() {
               maxLength={50}
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
             />
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function AccountPage() {
               maxLength={72}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
               placeholder="Leave blank to keep current password"
             />
           </div>
@@ -128,7 +128,7 @@ export default function AccountPage() {
         <button
           type="submit"
           disabled={saving}
-          className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+          className="inline-flex items-center gap-2 bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
         >
           {saving ? 'Saving...' : 'Save Changes'}
         </button>

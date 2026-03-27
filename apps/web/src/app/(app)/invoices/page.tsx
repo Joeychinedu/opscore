@@ -78,7 +78,7 @@ export default function InvoicesPage() {
         action={
           <Link
             href="/invoices/new"
-            className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-800"
+            className="inline-flex items-center gap-2 bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all"
           >
             <Plus className="h-4 w-4" />
             New Invoice
@@ -90,7 +90,7 @@ export default function InvoicesPage() {
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm text-gray-700 shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
         >
           <option value="">All Statuses</option>
           {STATUSES.filter(Boolean).map((s) => (
@@ -102,7 +102,7 @@ export default function InvoicesPage() {
       </div>
 
       {error && (
-        <div className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
+        <div className="mb-4 bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>
       )}
 
       {loading ? (
@@ -115,7 +115,7 @@ export default function InvoicesPage() {
           action={
             <Link
               href="/invoices/new"
-              className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-800"
+              className="inline-flex items-center gap-2 bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all"
             >
               <Plus className="h-4 w-4" />
               New Invoice
@@ -124,9 +124,9 @@ export default function InvoicesPage() {
         />
       ) : (
         <>
-          <div className="overflow-hidden rounded-lg border bg-white">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+          <div className="overflow-hidden bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03]">
+            <table className="min-w-full divide-y divide-gray-100">
+              <thead className="bg-gray-50/80">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Invoice No</th>
                   <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Client</th>
@@ -136,11 +136,11 @@ export default function InvoicesPage() {
                   <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Total</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-100">
                 {invoices.map((invoice) => (
-                  <tr key={invoice.id} className="hover:bg-gray-50">
+                  <tr key={invoice.id} className="hover:bg-gray-50/50">
                     <td className="whitespace-nowrap px-6 py-4 text-sm">
-                      <Link href={`/invoices/${invoice.id}`} className="font-medium text-blue-600 hover:text-blue-500">
+                      <Link href={`/invoices/${invoice.id}`} className="text-blue-500 hover:text-blue-600 font-medium">
                         {invoice.number}
                       </Link>
                     </td>
@@ -175,14 +175,14 @@ export default function InvoicesPage() {
                 <button
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+                  className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
                 >
                   Previous
                 </button>
                 <button
                   onClick={() => setPage((p) => Math.min(meta.totalPages, p + 1))}
                   disabled={page === meta.totalPages}
-                  className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+                  className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
                 >
                   Next
                 </button>

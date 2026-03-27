@@ -43,8 +43,8 @@ interface OrgSettings {
 function SettingsTabs() {
   const pathname = usePathname();
   return (
-    <div className="mb-6 border-b border-gray-200">
-      <nav className="-mb-px flex gap-6">
+    <div className="mb-6">
+      <nav className="flex gap-1 bg-gray-100/80 rounded-xl p-1 w-fit">
         {settingsTabs.map((tab) => {
           const active = pathname === tab.href;
           return (
@@ -52,10 +52,10 @@ function SettingsTabs() {
               key={tab.href}
               href={tab.href}
               className={cn(
-                'border-b-2 pb-3 text-sm font-medium transition-colors',
+                'rounded-lg px-4 py-2 text-sm font-medium transition-all',
                 active
-                  ? 'border-gray-900 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700',
               )}
             >
               {tab.label}
@@ -128,9 +128,9 @@ export default function SettingsPage() {
       {loading ? (
         <div className="text-sm text-gray-400">Loading settings...</div>
       ) : (
-        <form onSubmit={handleSave} className="max-w-lg space-y-5">
+        <form onSubmit={handleSave} className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6 max-w-lg space-y-5">
           {error && (
-            <div className="rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
+            <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>
           )}
           {success && (
             <div className="rounded-md bg-green-50 p-3 text-sm text-green-700">Settings saved successfully.</div>
@@ -146,7 +146,7 @@ export default function SettingsPage() {
               maxLength={10}
               value={invoicePrefix}
               onChange={(e) => setInvoicePrefix(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
               placeholder="INV"
             />
           </div>
@@ -159,7 +159,7 @@ export default function SettingsPage() {
               id="currency"
               value={currency}
               onChange={(e) => setCurrency(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
             >
               {CURRENCIES.map((c) => (
                 <option key={c} value={c}>{c}</option>
@@ -175,7 +175,7 @@ export default function SettingsPage() {
               id="timezone"
               value={timezone}
               onChange={(e) => setTimezone(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
             >
               {TIMEZONES.map((tz) => (
                 <option key={tz} value={tz}>{tz}</option>
@@ -186,7 +186,7 @@ export default function SettingsPage() {
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+            className="inline-flex items-center gap-2 bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
           >
             {saving ? 'Saving...' : 'Save Changes'}
           </button>

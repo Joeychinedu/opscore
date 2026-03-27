@@ -45,10 +45,10 @@ export default function ReportsPage() {
           <Link
             key={card.href}
             href={card.href}
-            className="group rounded-lg border bg-white p-6 hover:border-gray-300 transition-colors"
+            className="group bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6 hover:shadow-xl transition-all"
           >
             <div className="flex items-start gap-4">
-              <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${card.color}`}>
+              <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${card.color}`}>
                 <card.icon className="h-5 w-5" />
               </div>
               <div className="flex-1">

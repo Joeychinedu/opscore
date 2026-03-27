@@ -45,7 +45,7 @@ export default function ProjectReportPage() {
   }, []);
 
   if (loading) return <DashboardSkeleton />;
-  if (error) return <div className="rounded-md bg-red-50 p-4 text-sm text-red-700">{error}</div>;
+  if (error) return <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>;
   if (!data) return null;
 
   const statusData = data.byStatus.map((s) => ({
@@ -72,7 +72,7 @@ export default function ProjectReportPage() {
       </div>
 
       {/* Projects by Status Bar Chart */}
-      <div className="rounded-lg border bg-white p-5 mb-6">
+      <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6 mb-6">
         <h3 className="text-sm font-medium text-gray-900 mb-4">Projects by Status</h3>
         {statusData.length > 0 ? (
           <ResponsiveContainer width="100%" height={300}>
@@ -94,18 +94,18 @@ export default function ProjectReportPage() {
       </div>
 
       {/* Project Completions Table */}
-      <div className="rounded-lg border bg-white overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-100">
+          <thead className="bg-gray-50/80">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Project</th>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Completion</th>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Tasks</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-100">
             {(data.topProjects.length > 0 ? data.topProjects : data.projectCompletions).map((p, i) => (
-              <tr key={i} className="hover:bg-gray-50">
+              <tr key={i} className="hover:bg-gray-50/50">
                 <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">{p.name}</td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                   <div className="flex items-center gap-2">

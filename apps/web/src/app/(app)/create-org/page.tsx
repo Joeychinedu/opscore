@@ -62,9 +62,9 @@ export default function CreateOrgPage() {
           </p>
         </div>
 
-        <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-8">
           {error && (
-            <div className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
+            <div className="mb-4 bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -78,7 +78,7 @@ export default function CreateOrgPage() {
                 required
                 value={name}
                 onChange={(e) => handleNameChange(e.target.value)}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1.5 block w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none placeholder-gray-400"
                 placeholder="My Company"
               />
             </div>
@@ -96,7 +96,7 @@ export default function CreateOrgPage() {
                   setSlug(e.target.value);
                   setSlugTouched(true);
                 }}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1.5 block w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none placeholder-gray-400"
                 placeholder="my-company"
               />
               <p className="mt-1 text-xs text-gray-500">
@@ -107,7 +107,7 @@ export default function CreateOrgPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+              className="w-full bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
             >
               {submitting ? 'Creating...' : 'Create workspace'}
             </button>

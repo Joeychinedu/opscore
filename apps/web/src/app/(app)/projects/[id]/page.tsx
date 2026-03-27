@@ -81,7 +81,7 @@ export default function ProjectDetailPage() {
     return (
       <div>
         <PageHeader title="Project" />
-        <div className="rounded-md bg-red-50 p-4 text-sm text-red-700">
+        <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">
           {error || 'Project not found'}
         </div>
       </div>
@@ -110,7 +110,7 @@ export default function ProjectDetailPage() {
             <StatusBadge status={project.status} />
             <Link
               href={`/projects/${project.id}/edit`}
-              className="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="inline-flex items-center gap-2 bg-white text-gray-700 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:bg-gray-50"
             >
               <Pencil className="h-4 w-4" />
               Edit
@@ -120,14 +120,14 @@ export default function ProjectDetailPage() {
       />
 
       {/* Progress bar */}
-      <div className="mb-6 rounded-lg border bg-white p-4">
+      <div className="mb-6 bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-4">
         <div className="mb-2 flex items-center justify-between text-sm">
           <span className="font-medium text-gray-700">Progress</span>
           <span className="text-gray-500">{doneTasks}/{totalTasks} tasks completed ({progressPct}%)</span>
         </div>
         <div className="h-2 overflow-hidden rounded-full bg-gray-100">
           <div
-            className="h-full rounded-full bg-green-500 transition-all"
+            className="h-full rounded-full bg-blue-500 transition-all"
             style={{ width: `${progressPct}%` }}
           />
         </div>
@@ -136,13 +136,13 @@ export default function ProjectDetailPage() {
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Left: Tasks */}
         <div className="space-y-6 lg:col-span-2">
-          <div className="rounded-lg border bg-white p-6">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-sm font-semibold text-gray-900">Tasks ({totalTasks})</h2>
               <select
                 value={taskFilter}
                 onChange={(e) => setTaskFilter(e.target.value)}
-                className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="border border-gray-200 rounded-lg bg-white px-4 py-2 text-sm text-gray-700 shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
               >
                 <option value="">All</option>
                 {TASK_STATUSES.filter(Boolean).map((s) => (
@@ -153,9 +153,9 @@ export default function ProjectDetailPage() {
             {filteredTasks.length === 0 ? (
               <p className="text-sm text-gray-400">No tasks found.</p>
             ) : (
-              <div className="overflow-hidden rounded-md border">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+              <div className="overflow-hidden rounded-xl border border-gray-100">
+                <table className="min-w-full divide-y divide-gray-100">
+                  <thead className="bg-gray-50/80">
                     <tr>
                       <th className="px-4 py-2 text-left text-xs font-medium uppercase text-gray-500">Title</th>
                       <th className="px-4 py-2 text-left text-xs font-medium uppercase text-gray-500">Status</th>
@@ -164,11 +164,11 @@ export default function ProjectDetailPage() {
                       <th className="px-4 py-2 text-left text-xs font-medium uppercase text-gray-500">Due</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200">
+                  <tbody className="divide-y divide-gray-100">
                     {filteredTasks.map((task) => (
-                      <tr key={task.id} className="hover:bg-gray-50">
+                      <tr key={task.id} className="hover:bg-gray-50/50">
                         <td className="px-4 py-2 text-sm">
-                          <Link href={`/tasks/${task.id}`} className="font-medium text-blue-600 hover:text-blue-500">
+                          <Link href={`/tasks/${task.id}`} className="font-medium text-blue-500 hover:text-blue-600 font-medium">
                             {task.title}
                           </Link>
                         </td>
@@ -189,7 +189,7 @@ export default function ProjectDetailPage() {
           </div>
 
           {/* Members */}
-          <div className="rounded-lg border bg-white p-6">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
             <h2 className="mb-4 text-sm font-semibold text-gray-900">
               Members ({project._count.members})
             </h2>
@@ -200,9 +200,9 @@ export default function ProjectDetailPage() {
                 {project.members.map((member) => (
                   <div
                     key={member.id}
-                    className="flex items-center gap-2 rounded-full border bg-gray-50 px-3 py-1.5"
+                    className="flex items-center gap-2 rounded-full border border-gray-100 bg-white/70 px-3 py-1.5"
                   >
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-200 text-xs font-medium text-gray-600">
+                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 text-xs font-medium text-white">
                       {member.user
                         ? `${member.user.firstName[0]}${member.user.lastName[0]}`
                         : <UsersIcon className="h-3 w-3" />}
@@ -221,14 +221,14 @@ export default function ProjectDetailPage() {
 
         {/* Right: Project info */}
         <div>
-          <div className="rounded-lg border bg-white p-6">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
             <h2 className="mb-4 text-sm font-semibold text-gray-900">Project Info</h2>
             <dl className="space-y-4">
               <div>
                 <dt className="text-xs font-medium uppercase text-gray-400">Client</dt>
                 <dd className="mt-1 text-sm text-gray-700">
                   {project.client ? (
-                    <Link href={`/clients/${project.client.id}`} className="text-blue-600 hover:text-blue-500">
+                    <Link href={`/clients/${project.client.id}`} className="text-blue-500 hover:text-blue-600 font-medium">
                       {project.client.name}
                     </Link>
                   ) : (

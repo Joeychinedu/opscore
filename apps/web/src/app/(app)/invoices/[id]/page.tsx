@@ -113,7 +113,7 @@ export default function InvoiceDetailPage() {
     return (
       <div>
         <PageHeader title="Invoice" />
-        <div className="rounded-md bg-red-50 p-4 text-sm text-red-700">
+        <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">
           {error || 'Invoice not found'}
         </div>
       </div>
@@ -133,14 +133,14 @@ export default function InvoiceDetailPage() {
                 <button
                   onClick={handleSend}
                   disabled={actionLoading}
-                  className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-500 disabled:opacity-50"
+                  className="inline-flex items-center gap-2 bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
                 >
                   <Send className="h-4 w-4" />
                   Send Invoice
                 </button>
                 <Link
                   href={`/invoices/${invoice.id}/edit`}
-                  className="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                  className="inline-flex items-center gap-2 bg-white text-gray-700 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:bg-gray-50"
                 >
                   <Pencil className="h-4 w-4" />
                   Edit
@@ -152,7 +152,7 @@ export default function InvoiceDetailPage() {
               <button
                 onClick={handleMarkPaid}
                 disabled={actionLoading}
-                className="inline-flex items-center gap-2 rounded-lg bg-green-600 px-3 py-2 text-sm font-medium text-white hover:bg-green-500 disabled:opacity-50"
+                className="inline-flex items-center gap-2 bg-gradient-to-t from-green-600 to-green-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
               >
                 <CheckCircle className="h-4 w-4" />
                 Mark as Paid
@@ -161,7 +161,7 @@ export default function InvoiceDetailPage() {
 
             <button
               onClick={handleDownloadPdf}
-              className="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="inline-flex items-center gap-2 bg-white text-gray-700 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:bg-gray-50"
             >
               <Download className="h-4 w-4" />
               Download PDF
@@ -171,7 +171,7 @@ export default function InvoiceDetailPage() {
       />
 
       {/* Invoice Preview Card */}
-      <div className="rounded-lg border bg-white p-8 shadow-sm">
+      <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/[0.06] p-8">
         {/* Invoice Header */}
         <div className="mb-8 flex items-start justify-between border-b pb-6">
           <div>
@@ -204,7 +204,7 @@ export default function InvoiceDetailPage() {
               Project:{' '}
               <Link
                 href={`/projects/${invoice.project.id}`}
-                className="text-blue-600 hover:text-blue-500"
+                className="text-blue-500 hover:text-blue-600 font-medium"
               >
                 {invoice.project.name}
               </Link>
@@ -213,9 +213,9 @@ export default function InvoiceDetailPage() {
         </div>
 
         {/* Line Items Table */}
-        <div className="mb-6 overflow-hidden rounded-md border">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+        <div className="mb-6 overflow-hidden rounded-xl border border-gray-100">
+          <table className="min-w-full divide-y divide-gray-100">
+            <thead className="bg-gray-50/80">
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                   Description
@@ -231,7 +231,7 @@ export default function InvoiceDetailPage() {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-100">
               {invoice.lineItems.map((item) => (
                 <tr key={item.id}>
                   <td className="px-4 py-3 text-sm text-gray-700">{item.description}</td>

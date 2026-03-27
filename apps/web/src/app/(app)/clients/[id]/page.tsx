@@ -101,7 +101,7 @@ export default function ClientDetailPage() {
     return (
       <div>
         <PageHeader title="Client" />
-        <div className="rounded-md bg-red-50 p-4 text-sm text-red-700">
+        <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">
           {error || 'Client not found'}
         </div>
       </div>
@@ -116,7 +116,7 @@ export default function ClientDetailPage() {
         action={
           <Link
             href={`/clients/${client.id}/edit`}
-            className="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="inline-flex items-center gap-2 bg-white text-gray-700 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:bg-gray-50"
           >
             <Pencil className="h-4 w-4" />
             Edit
@@ -128,13 +128,13 @@ export default function ClientDetailPage() {
         {/* Left column */}
         <div className="space-y-6 lg:col-span-2">
           {/* Contact info */}
-          <div className="rounded-lg border bg-white p-6">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
             <h2 className="mb-4 text-sm font-semibold text-gray-900">Contact Information</h2>
             <div className="grid gap-4 sm:grid-cols-2">
               {client.email && (
                 <div className="flex items-center gap-3 text-sm text-gray-600">
                   <Mail className="h-4 w-4 text-gray-400" />
-                  <a href={`mailto:${client.email}`} className="text-blue-600 hover:text-blue-500">
+                  <a href={`mailto:${client.email}`} className="text-blue-500 hover:text-blue-600 font-medium">
                     {client.email}
                   </a>
                 </div>
@@ -164,7 +164,7 @@ export default function ClientDetailPage() {
           </div>
 
           {/* Projects */}
-          <div className="rounded-lg border bg-white p-6">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
             <h2 className="mb-4 text-sm font-semibold text-gray-900">
               Projects ({client._count.projects})
             </h2>
@@ -173,8 +173,8 @@ export default function ClientDetailPage() {
             ) : (
               <div className="space-y-3">
                 {client.projects.map((project) => (
-                  <div key={project.id} className="flex items-center justify-between rounded-md border px-4 py-3">
-                    <Link href={`/projects/${project.id}`} className="text-sm font-medium text-blue-600 hover:text-blue-500">
+                  <div key={project.id} className="flex items-center justify-between rounded-lg border border-gray-100 px-4 py-3 hover:bg-gray-50/50 transition-colors">
+                    <Link href={`/projects/${project.id}`} className="text-sm font-medium text-blue-500 hover:text-blue-600 font-medium">
                       {project.name}
                     </Link>
                     <StatusBadge status={project.status} />
@@ -185,25 +185,25 @@ export default function ClientDetailPage() {
           </div>
 
           {/* Invoices */}
-          <div className="rounded-lg border bg-white p-6">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
             <h2 className="mb-4 text-sm font-semibold text-gray-900">
               Invoices ({client._count.invoices})
             </h2>
             {client.invoices.length === 0 ? (
               <p className="text-sm text-gray-400">No invoices yet.</p>
             ) : (
-              <div className="overflow-hidden rounded-md border">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+              <div className="overflow-hidden rounded-xl border border-gray-100">
+                <table className="min-w-full divide-y divide-gray-100">
+                  <thead className="bg-gray-50/80">
                     <tr>
                       <th className="px-4 py-2 text-left text-xs font-medium uppercase text-gray-500">Number</th>
                       <th className="px-4 py-2 text-left text-xs font-medium uppercase text-gray-500">Status</th>
                       <th className="px-4 py-2 text-right text-xs font-medium uppercase text-gray-500">Total</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200">
+                  <tbody className="divide-y divide-gray-100">
                     {client.invoices.map((inv) => (
-                      <tr key={inv.id} className="hover:bg-gray-50">
+                      <tr key={inv.id} className="hover:bg-gray-50/50">
                         <td className="px-4 py-2 text-sm text-gray-900">{inv.number}</td>
                         <td className="px-4 py-2 text-sm"><StatusBadge status={inv.status} /></td>
                         <td className="px-4 py-2 text-right text-sm text-gray-700">
@@ -220,7 +220,7 @@ export default function ClientDetailPage() {
 
         {/* Right column - Notes */}
         <div>
-          <div className="rounded-lg border bg-white p-6">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
             <h2 className="mb-4 text-sm font-semibold text-gray-900">Notes</h2>
             <form onSubmit={handleAddNote} className="mb-4 flex gap-2">
               <input
@@ -228,12 +228,12 @@ export default function ClientDetailPage() {
                 value={noteText}
                 onChange={(e) => setNoteText(e.target.value)}
                 placeholder="Add a note..."
-                className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="flex-1 border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none placeholder-gray-400"
               />
               <button
                 type="submit"
                 disabled={addingNote || !noteText.trim()}
-                className="rounded-lg bg-gray-900 p-2 text-white hover:bg-gray-800 disabled:opacity-50"
+                className="bg-gradient-to-t from-blue-600 to-blue-500 rounded-lg p-2.5 text-white shadow-sm hover:shadow-md transition-all disabled:opacity-50"
               >
                 <Send className="h-4 w-4" />
               </button>
@@ -243,7 +243,7 @@ export default function ClientDetailPage() {
             ) : (
               <div className="space-y-3">
                 {client.notes.map((note) => (
-                  <div key={note.id} className="rounded-md bg-gray-50 px-3 py-2">
+                  <div key={note.id} className="rounded-xl bg-blue-50/50 px-3 py-2">
                     <p className="text-sm text-gray-700">{note.content}</p>
                     <p className="mt-1 text-xs text-gray-400">
                       {new Date(note.createdAt).toLocaleDateString()}

@@ -77,13 +77,13 @@ export default function NewProjectPage() {
       <PageHeader title="New Project" description="Create a new project" />
 
       {error && (
-        <div className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
+        <div className="mb-4 bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>
       )}
 
-      <form onSubmit={handleSubmit} className="rounded-lg border bg-white p-6">
+      <form onSubmit={handleSubmit} className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="sm:col-span-2">
-            <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-gray-700">
               Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -93,13 +93,13 @@ export default function NewProjectPage() {
               required
               value={form.name}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none placeholder-gray-400"
               placeholder="Project name"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label htmlFor="description" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="description" className="mb-1.5 block text-sm font-medium text-gray-700">
               Description
             </label>
             <textarea
@@ -108,13 +108,13 @@ export default function NewProjectPage() {
               rows={3}
               value={form.description}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none placeholder-gray-400"
               placeholder="Project description..."
             />
           </div>
 
           <div>
-            <label htmlFor="clientId" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="clientId" className="mb-1.5 block text-sm font-medium text-gray-700">
               Client
             </label>
             <select
@@ -122,7 +122,7 @@ export default function NewProjectPage() {
               name="clientId"
               value={form.clientId}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
             >
               <option value="">No client</option>
               {clients.map((c) => (
@@ -132,7 +132,7 @@ export default function NewProjectPage() {
           </div>
 
           <div>
-            <label htmlFor="status" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="status" className="mb-1.5 block text-sm font-medium text-gray-700">
               Status
             </label>
             <select
@@ -140,7 +140,7 @@ export default function NewProjectPage() {
               name="status"
               value={form.status}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg bg-white px-4 py-2.5 text-sm shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
             >
               {PROJECT_STATUSES.map((s) => (
                 <option key={s} value={s}>{s.replace(/_/g, ' ')}</option>
@@ -149,7 +149,7 @@ export default function NewProjectPage() {
           </div>
 
           <div>
-            <label htmlFor="startDate" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="startDate" className="mb-1.5 block text-sm font-medium text-gray-700">
               Start Date
             </label>
             <input
@@ -158,12 +158,12 @@ export default function NewProjectPage() {
               type="date"
               value={form.startDate}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
             />
           </div>
 
           <div>
-            <label htmlFor="dueDate" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="dueDate" className="mb-1.5 block text-sm font-medium text-gray-700">
               Due Date
             </label>
             <input
@@ -172,12 +172,12 @@ export default function NewProjectPage() {
               type="date"
               value={form.dueDate}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none"
             />
           </div>
 
           <div>
-            <label htmlFor="budget" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="budget" className="mb-1.5 block text-sm font-medium text-gray-700">
               Budget
             </label>
             <input
@@ -188,7 +188,7 @@ export default function NewProjectPage() {
               min="0"
               value={form.budget}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none placeholder-gray-400"
               placeholder="0.00"
             />
           </div>
@@ -198,13 +198,13 @@ export default function NewProjectPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+            className="bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
           >
             {submitting ? 'Creating...' : 'Create Project'}
           </button>
           <Link
             href="/projects"
-            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="bg-white text-gray-700 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:bg-gray-50"
           >
             Cancel
           </Link>

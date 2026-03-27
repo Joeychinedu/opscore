@@ -151,7 +151,7 @@ export default function EditInvoicePage() {
     return (
       <div>
         <PageHeader title="Edit Invoice" />
-        <div className="rounded-md bg-red-50 p-4 text-sm text-red-700">
+        <div className="bg-red-50/80 text-red-600 text-sm rounded-xl p-4">
           {error || 'Invoice not found'}
         </div>
       </div>
@@ -161,7 +161,7 @@ export default function EditInvoicePage() {
   if (!invoice) return null;
 
   const inputClass =
-    'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500';
+    'w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:outline-none placeholder-gray-400';
 
   return (
     <div>
@@ -171,16 +171,16 @@ export default function EditInvoicePage() {
       />
 
       {error && (
-        <div className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
+        <div className="mb-4 bg-red-50/80 text-red-600 text-sm rounded-xl p-4">{error}</div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Invoice Details */}
-        <div className="rounded-lg border bg-white p-6">
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
           <h2 className="mb-4 text-sm font-semibold text-gray-900">Invoice Details</h2>
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
-              <label htmlFor="clientId" className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="clientId" className="mb-1.5 block text-sm font-medium text-gray-700">
                 Client <span className="text-red-500">*</span>
               </label>
               <select
@@ -203,7 +203,7 @@ export default function EditInvoicePage() {
             </div>
 
             <div>
-              <label htmlFor="projectId" className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="projectId" className="mb-1.5 block text-sm font-medium text-gray-700">
                 Project
               </label>
               <select
@@ -225,7 +225,7 @@ export default function EditInvoicePage() {
             </div>
 
             <div>
-              <label htmlFor="dueDate" className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="dueDate" className="mb-1.5 block text-sm font-medium text-gray-700">
                 Due Date <span className="text-red-500">*</span>
               </label>
               <input
@@ -239,7 +239,7 @@ export default function EditInvoicePage() {
             </div>
 
             <div>
-              <label htmlFor="taxRate" className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="taxRate" className="mb-1.5 block text-sm font-medium text-gray-700">
                 Tax Rate (%)
               </label>
               <input
@@ -256,7 +256,7 @@ export default function EditInvoicePage() {
             </div>
 
             <div className="sm:col-span-2">
-              <label htmlFor="notes" className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="notes" className="mb-1.5 block text-sm font-medium text-gray-700">
                 Notes
               </label>
               <textarea
@@ -272,13 +272,13 @@ export default function EditInvoicePage() {
         </div>
 
         {/* Read-only Line Items */}
-        <div className="rounded-lg border bg-white p-6">
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/[0.03] p-6">
           <h2 className="mb-4 text-sm font-semibold text-gray-900">
             Line Items <span className="text-xs font-normal text-gray-400">(read-only)</span>
           </h2>
-          <div className="overflow-hidden rounded-md border">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+          <div className="overflow-hidden rounded-xl border border-gray-100">
+            <table className="min-w-full divide-y divide-gray-100">
+              <thead className="bg-gray-50/80">
                 <tr>
                   <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                     Description
@@ -294,7 +294,7 @@ export default function EditInvoicePage() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 bg-gray-50/50">
+              <tbody className="divide-y divide-gray-100 bg-gray-50/50">
                 {invoice.lineItems.map((item) => (
                   <tr key={item.id}>
                     <td className="px-4 py-3 text-sm text-gray-700">{item.description}</td>
@@ -316,13 +316,13 @@ export default function EditInvoicePage() {
           <button
             type="submit"
             disabled={submitting}
-            className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+            className="bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
           >
             {submitting ? 'Saving...' : 'Save Changes'}
           </button>
           <Link
             href={`/invoices/${invoice.id}`}
-            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="bg-white text-gray-700 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:bg-gray-50"
           >
             Cancel
           </Link>
