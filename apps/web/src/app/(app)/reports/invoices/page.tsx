@@ -46,8 +46,14 @@ export default function InvoiceReportPage() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await api.get<InvoiceReportData>('/reports/invoices');
-        setData(res);
+        const res = await api.get<any>('/reports/invoices');
+        setData({
+          totalOutstanding: res.totalOutstanding ?? 0,
+          totalOverdue: res.totalOverdue ?? 0,
+          byStatus: res.byStatus || [],
+          recentInvoices: res.recentInvoices || [],
+          avgDaysToPayment: res.avgDaysToPayment ?? 0,
+        });
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load invoice report');
       } finally {

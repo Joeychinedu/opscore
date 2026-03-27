@@ -32,8 +32,10 @@ export default function TeamReportPage() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await api.get<TeamReportData>('/reports/team');
-        setData(res);
+        const res = await api.get<any>('/reports/team');
+        setData({
+          members: res.members || [],
+        });
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load team report');
       } finally {

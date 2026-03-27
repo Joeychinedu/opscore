@@ -48,9 +48,9 @@ export default function EditProjectPage() {
       try {
         const [project, clientsRes] = await Promise.all([
           api.get<ProjectData>(`/projects/${params.id}`),
-          api.get<{ data: ClientOption[] }>('/clients?limit=100'),
+          api.get<any>('/clients?limit=100'),
         ]);
-        setClients(clientsRes.data);
+        setClients(Array.isArray(clientsRes.data) ? clientsRes.data : Array.isArray(clientsRes) ? clientsRes : []);
         setForm({
           name: project.name,
           description: project.description || '',

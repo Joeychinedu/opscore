@@ -40,9 +40,11 @@ export default function ClientsPage() {
       params.set('page', String(page));
       params.set('limit', '20');
       if (search) params.set('search', search);
-      const res = await api.get<{ data: Client[]; meta: Meta }>(`/clients?${params}`);
-      setClients(res.data);
-      setMeta(res.meta);
+      const res = await api.get<any>(`/clients?${params}`);
+      const items = Array.isArray(res.data) ? res.data : Array.isArray(res) ? res : [];
+      const paginationMeta = res.meta || null;
+      setClients(items);
+      setMeta(paginationMeta);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load clients');
     } finally {

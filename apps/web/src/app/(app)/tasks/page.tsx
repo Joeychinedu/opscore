@@ -65,11 +65,11 @@ export default function TasksPage() {
     async function loadFilters() {
       try {
         const [projRes, memRes] = await Promise.all([
-          api.get<{ data: ProjectOption[] }>('/projects?limit=100'),
-          api.get<MemberOption[]>('/members'),
+          api.get<any>('/projects?limit=100'),
+          api.get<any>('/members'),
         ]);
-        setProjects(projRes.data);
-        setMembers(Array.isArray(memRes) ? memRes : []);
+        setProjects(Array.isArray(projRes.data) ? projRes.data : Array.isArray(projRes) ? projRes : []);
+        setMembers(Array.isArray(memRes.data) ? memRes.data : Array.isArray(memRes) ? memRes : []);
       } catch {
         // Non-critical
       }
@@ -89,9 +89,11 @@ export default function TasksPage() {
       if (priorityFilter) params.set('priority', priorityFilter);
       if (projectFilter) params.set('projectId', projectFilter);
       if (assigneeFilter) params.set('assigneeId', assigneeFilter);
-      const res = await api.get<{ data: Task[]; meta: Meta }>(`/tasks?${params}`);
-      setTasks(res.data);
-      setMeta(res.meta);
+      const res = await api.get<any>(`/tasks?${params}`);
+      const items = Array.isArray(res.data) ? res.data : Array.isArray(res) ? res : [];
+      const paginationMeta = res.meta || null;
+      setTasks(items);
+      setMeta(paginationMeta);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load tasks');
     } finally {

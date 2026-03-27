@@ -50,8 +50,8 @@ export default function NewInvoicePage() {
   useEffect(() => {
     async function loadClients() {
       try {
-        const res = await api.get<{ data: Client[] }>('/clients?limit=100');
-        setClients(res.data);
+        const res = await api.get<any>('/clients?limit=100');
+        setClients(Array.isArray(res.data) ? res.data : Array.isArray(res) ? res : []);
       } catch {
         // ignore
       } finally {
@@ -71,8 +71,8 @@ export default function NewInvoicePage() {
     setProjectId('');
     async function loadProjects() {
       try {
-        const res = await api.get<{ data: Project[] }>(`/projects?clientId=${clientId}&limit=100`);
-        setProjects(res.data);
+        const res = await api.get<any>(`/projects?clientId=${clientId}&limit=100`);
+        setProjects(Array.isArray(res.data) ? res.data : Array.isArray(res) ? res : []);
       } catch {
         setProjects([]);
       } finally {

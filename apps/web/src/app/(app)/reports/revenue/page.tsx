@@ -40,8 +40,13 @@ export default function RevenueReportPage() {
       const params = new URLSearchParams();
       if (from) params.set('from', from);
       if (to) params.set('to', to);
-      const res = await api.get<RevenueData>(`/reports/revenue?${params}`);
-      setData(res);
+      const res = await api.get<any>(`/reports/revenue?${params}`);
+      setData({
+        monthlyRevenue: res.monthlyRevenue || [],
+        totalRevenue: res.totalRevenue ?? 0,
+        averagePerMonth: res.averagePerMonth ?? 0,
+        paidCount: res.paidCount ?? 0,
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load revenue report');
     } finally {

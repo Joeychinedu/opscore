@@ -32,8 +32,8 @@ export default function NewProjectPage() {
   useEffect(() => {
     async function loadClients() {
       try {
-        const res = await api.get<{ data: ClientOption[] }>('/clients?limit=100');
-        setClients(res.data);
+        const res = await api.get<any>('/clients?limit=100');
+        setClients(Array.isArray(res.data) ? res.data : Array.isArray(res) ? res : []);
       } catch {
         // Non-critical
       }

@@ -33,8 +33,13 @@ export default function ProjectReportPage() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await api.get<ProjectReportData>('/reports/projects');
-        setData(res);
+        const res = await api.get<any>('/reports/projects');
+        setData({
+          byStatus: res.byStatus || [],
+          avgTasksPerProject: res.avgTasksPerProject ?? 0,
+          projectCompletions: res.projectCompletions || [],
+          topProjects: res.topProjects || [],
+        });
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load project report');
       } finally {

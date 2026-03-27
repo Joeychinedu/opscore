@@ -41,11 +41,11 @@ export default function NewTaskPage() {
     async function loadOptions() {
       try {
         const [projRes, memRes] = await Promise.all([
-          api.get<{ data: ProjectOption[] }>('/projects?limit=100'),
-          api.get<MemberOption[]>('/members'),
+          api.get<any>('/projects?limit=100'),
+          api.get<any>('/members'),
         ]);
-        setProjects(projRes.data);
-        setMembers(Array.isArray(memRes) ? memRes : []);
+        setProjects(Array.isArray(projRes.data) ? projRes.data : Array.isArray(projRes) ? projRes : []);
+        setMembers(Array.isArray(memRes.data) ? memRes.data : Array.isArray(memRes) ? memRes : []);
       } catch {
         // Non-critical
       }

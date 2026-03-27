@@ -45,9 +45,11 @@ export default function ProjectsPage() {
       params.set('limit', '20');
       if (search) params.set('search', search);
       if (statusFilter) params.set('status', statusFilter);
-      const res = await api.get<{ data: Project[]; meta: Meta }>(`/projects?${params}`);
-      setProjects(res.data);
-      setMeta(res.meta);
+      const res = await api.get<any>(`/projects?${params}`);
+      const items = Array.isArray(res.data) ? res.data : Array.isArray(res) ? res : [];
+      const paginationMeta = res.meta || null;
+      setProjects(items);
+      setMeta(paginationMeta);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load projects');
     } finally {

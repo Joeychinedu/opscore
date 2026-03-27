@@ -79,8 +79,17 @@ export default function DashboardPage() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await api.get<DashboardData>('/dashboard');
-        setData(res);
+        const res = await api.get<any>('/dashboard');
+        setData({
+          totalClients: res.totalClients ?? 0,
+          activeProjects: res.activeProjects ?? 0,
+          tasksDueThisWeek: res.tasksDueThisWeek ?? 0,
+          revenueThisMonth: res.revenueThisMonth ?? 0,
+          tasksByStatus: res.tasksByStatus || [],
+          invoiceSummary: res.invoiceSummary || [],
+          recentActivity: res.recentActivity || [],
+          upcomingTasks: res.upcomingTasks || [],
+        });
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load dashboard');
       } finally {
@@ -102,13 +111,13 @@ export default function DashboardPage() {
 
   const tasksPieData = Object.entries(data.tasksByStatus || {}).map(([status, count]) => ({
     name: status.replace(/_/g, ' '),
-    value: count as number,
+    value: count as unknown as number,
     color: CHART_COLORS[status] || '#6b7280',
   }));
 
   const invoiceBarData = Object.entries(data.invoiceSummary || {}).map(([status, count]) => ({
     name: status.replace(/_/g, ' '),
-    count: count as number,
+    count: count as unknown as number,
     fill: CHART_COLORS[status] || '#6b7280',
   }));
 

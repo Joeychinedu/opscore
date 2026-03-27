@@ -66,7 +66,7 @@ export default function EditInvoicePage() {
       try {
         const [inv, clientRes] = await Promise.all([
           api.get<InvoiceDetail>(`/invoices/${params.id}`),
-          api.get<{ data: Client[] }>('/clients?limit=100'),
+          api.get<any>('/clients?limit=100'),
         ]);
 
         if (inv.status !== 'DRAFT') {
@@ -75,7 +75,7 @@ export default function EditInvoicePage() {
         }
 
         setInvoice(inv);
-        setClients(clientRes.data);
+        setClients(Array.isArray(clientRes.data) ? clientRes.data : Array.isArray(clientRes) ? clientRes : []);
         setClientId(inv.client.id);
         setProjectId(inv.project?.id || '');
         setDueDate(inv.dueDate ? inv.dueDate.split('T')[0] : '');
@@ -84,10 +84,10 @@ export default function EditInvoicePage() {
 
         // Load projects for the client
         if (inv.client.id) {
-          const projRes = await api.get<{ data: Project[] }>(
+          const projRes = await api.get<any>(
             `/projects?clientId=${inv.client.id}&limit=100`,
           );
-          setProjects(projRes.data);
+          setProjects(Array.isArray(projRes.data) ? projRes.data : Array.isArray(projRes) ? projRes : []);
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load invoice');
@@ -102,8 +102,8 @@ export default function EditInvoicePage() {
     if (!clientId || loading) return;
     async function loadProjects() {
       try {
-        const res = await api.get<{ data: Project[] }>(`/projects?clientId=${clientId}&limit=100`);
-        setProjects(res.data);
+        const res = await api.get<any>(`/projects?clientId=${clientId}&limit=100`);
+        setProjects(Array.isArray(res.data) ? res.data : Array.isArray(res) ? res : []);
       } catch {
         setProjects([]);
       }
