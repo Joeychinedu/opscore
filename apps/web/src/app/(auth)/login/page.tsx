@@ -7,7 +7,7 @@ import { useAuthStore } from '@/lib/auth';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, demoLogin, error, clearError, isLoading } = useAuthStore();
+  const { login, demoLogin, error, clearError } = useAuthStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -83,7 +83,7 @@ export default function LoginPage() {
 
         <button
           type="submit"
-          disabled={submitting || isLoading}
+          disabled={submitting}
           className="w-full bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
         >
           {submitting ? 'Signing in...' : 'Sign in'}
@@ -102,7 +102,7 @@ export default function LoginPage() {
       <button
         type="button"
         onClick={handleDemo}
-        disabled={submitting || isLoading}
+        disabled={submitting}
         className="w-full bg-white text-gray-800 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:bg-gray-50 transition-all disabled:opacity-50"
       >
         Try Demo

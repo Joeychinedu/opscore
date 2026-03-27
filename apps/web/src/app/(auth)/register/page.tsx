@@ -7,7 +7,7 @@ import { useAuthStore } from '@/lib/auth';
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { register, error, clearError, isLoading } = useAuthStore();
+  const { register, error, clearError } = useAuthStore();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -103,7 +103,7 @@ export default function RegisterPage() {
 
         <button
           type="submit"
-          disabled={submitting || isLoading}
+          disabled={submitting}
           className="w-full bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
         >
           {submitting ? 'Creating account...' : 'Create account'}
