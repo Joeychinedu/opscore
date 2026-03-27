@@ -47,12 +47,17 @@ export default function InvoiceReportPage() {
     async function load() {
       try {
         const res = await api.get<any>('/reports/invoices');
+        // Backend returns: countByStatus (object), averageDaysToPayment, recentInvoices
+        const statusObj = res.countByStatus || res.byStatus || {};
+        const byStatus = Array.isArray(statusObj)
+          ? statusObj
+          : Object.entries(statusObj).map(([status, count]) => ({ status: status.toUpperCase(), count: count as number }));
         setData({
           totalOutstanding: res.totalOutstanding ?? 0,
           totalOverdue: res.totalOverdue ?? 0,
-          byStatus: res.byStatus || [],
+          byStatus,
           recentInvoices: res.recentInvoices || [],
-          avgDaysToPayment: res.avgDaysToPayment ?? 0,
+          avgDaysToPayment: res.averageDaysToPayment ?? res.avgDaysToPayment ?? 0,
         });
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load invoice report');

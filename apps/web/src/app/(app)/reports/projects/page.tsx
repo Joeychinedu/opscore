@@ -34,11 +34,24 @@ export default function ProjectReportPage() {
     async function load() {
       try {
         const res = await api.get<any>('/reports/projects');
+        // Backend returns: projectsByStatus (object), averageTasksPerProject, projects, topByTaskCount
+        const statusObj = res.projectsByStatus || {};
+        const byStatus = Object.entries(statusObj).map(([status, count]) => ({ status, count: count as number }));
+        const projects = (res.projects || []).map((p: any) => ({
+          name: p.name,
+          completionPct: p.completionPercentage ?? 0,
+          taskCount: p.totalTasks ?? 0,
+        }));
+        const top = (res.topByTaskCount || []).map((p: any) => ({
+          name: p.name,
+          completionPct: p.completionPercentage ?? 0,
+          taskCount: p.totalTasks ?? 0,
+        }));
         setData({
-          byStatus: res.byStatus || [],
-          avgTasksPerProject: res.avgTasksPerProject ?? 0,
-          projectCompletions: res.projectCompletions || [],
-          topProjects: res.topProjects || [],
+          byStatus,
+          avgTasksPerProject: res.averageTasksPerProject ?? 0,
+          projectCompletions: projects,
+          topProjects: top,
         });
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load project report');

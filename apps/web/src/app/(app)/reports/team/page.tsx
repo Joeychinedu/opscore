@@ -33,9 +33,16 @@ export default function TeamReportPage() {
     async function load() {
       try {
         const res = await api.get<any>('/reports/team');
-        setData({
-          members: res.members || [],
-        });
+        // Backend returns array directly with { user, tasksAssigned, tasksCompleted, tasksInProgress }
+        const raw = Array.isArray(res) ? res : res.members || [];
+        const members = raw.map((m: any) => ({
+          firstName: m.user?.firstName || m.firstName || '',
+          lastName: m.user?.lastName || m.lastName || '',
+          assigned: m.tasksAssigned ?? m.assigned ?? 0,
+          completed: m.tasksCompleted ?? m.completed ?? 0,
+          inProgress: m.tasksInProgress ?? m.inProgress ?? 0,
+        }));
+        setData({ members });
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load team report');
       } finally {

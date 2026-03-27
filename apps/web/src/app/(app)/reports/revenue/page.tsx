@@ -42,10 +42,10 @@ export default function RevenueReportPage() {
       if (to) params.set('to', to);
       const res = await api.get<any>(`/reports/revenue?${params}`);
       setData({
-        monthlyRevenue: res.monthlyRevenue || [],
+        monthlyRevenue: res.monthly || res.monthlyRevenue || [],
         totalRevenue: res.totalRevenue ?? 0,
         averagePerMonth: res.averagePerMonth ?? 0,
-        paidCount: res.paidCount ?? 0,
+        paidCount: res.paidInvoiceCount ?? res.paidCount ?? 0,
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load revenue report');
