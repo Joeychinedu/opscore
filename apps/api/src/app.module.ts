@@ -9,6 +9,9 @@ import { ClientsModule } from './modules/clients/clients.module.js';
 import { ProjectsModule } from './modules/projects/projects.module.js';
 import { TasksModule } from './modules/tasks/tasks.module.js';
 import { InvoicesModule } from './modules/invoices/invoices.module.js';
+import { DashboardModule } from './modules/dashboard/dashboard.module.js';
+import { ActivityModule } from './modules/activity/activity.module.js';
+import { ReportsModule } from './modules/reports/reports.module.js';
 
 @Module({
   imports: [
@@ -20,6 +23,9 @@ import { InvoicesModule } from './modules/invoices/invoices.module.js';
     ProjectsModule,
     TasksModule,
     InvoicesModule,
+    DashboardModule,
+    ActivityModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
