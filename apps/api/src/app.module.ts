@@ -8,6 +8,7 @@ import { MembershipsModule } from './modules/memberships/memberships.module.js';
 import { ClientsModule } from './modules/clients/clients.module.js';
 import { ProjectsModule } from './modules/projects/projects.module.js';
 import { TasksModule } from './modules/tasks/tasks.module.js';
+import { InvoicesModule } from './modules/invoices/invoices.module.js';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TasksModule } from './modules/tasks/tasks.module.js';
     ClientsModule,
     ProjectsModule,
     TasksModule,
+    InvoicesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
