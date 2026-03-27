@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 import { TableSkeleton } from '@/components/feedback/loading-skeleton';
@@ -89,8 +90,10 @@ export default function EditProjectPage() {
       if (form.dueDate) body.dueDate = form.dueDate;
       if (form.budget) body.budget = parseFloat(form.budget);
       await api.patch(`/projects/${params.id}`, body);
+      toast.success('Project updated');
       router.push(`/projects/${params.id}`);
     } catch (err) {
+      toast.error('Failed to update project');
       setError(err instanceof Error ? err.message : 'Failed to update project');
     } finally {
       setSubmitting(false);

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 
@@ -73,8 +74,10 @@ export default function NewTaskPage() {
       if (form.assigneeId) body.assigneeId = form.assigneeId;
       if (form.dueDate) body.dueDate = form.dueDate;
       await api.post('/tasks', body);
+      toast.success('Task created');
       router.push('/tasks');
     } catch (err) {
+      toast.error('Failed to create task');
       setError(err instanceof Error ? err.message : 'Failed to create task');
     } finally {
       setSubmitting(false);

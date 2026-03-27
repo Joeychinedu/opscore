@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Pencil, Send, CheckCircle, Download } from 'lucide-react';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 import { StatusBadge } from '@/components/data/status-badge';
@@ -69,7 +70,9 @@ export default function InvoiceDetailPage() {
     try {
       await api.post(`/invoices/${invoice.id}/send`);
       setInvoice((prev) => (prev ? { ...prev, status: 'SENT' } : prev));
+      toast.success('Invoice sent');
     } catch (err) {
+      toast.error('Failed to send invoice');
       setError(err instanceof Error ? err.message : 'Failed to send invoice');
     } finally {
       setActionLoading(false);
@@ -82,7 +85,9 @@ export default function InvoiceDetailPage() {
     try {
       await api.post(`/invoices/${invoice.id}/mark-paid`);
       setInvoice((prev) => (prev ? { ...prev, status: 'PAID' } : prev));
+      toast.success('Invoice marked as paid');
     } catch (err) {
+      toast.error('Failed to mark invoice as paid');
       setError(err instanceof Error ? err.message : 'Failed to mark invoice as paid');
     } finally {
       setActionLoading(false);

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 import { TableSkeleton } from '@/components/feedback/loading-skeleton';
@@ -127,8 +128,10 @@ export default function EditInvoicePage() {
       if (notes.trim()) body.notes = notes.trim();
 
       await api.patch(`/invoices/${params.id}`, body);
+      toast.success('Invoice updated');
       router.push(`/invoices/${params.id}`);
     } catch (err) {
+      toast.error('Failed to update invoice');
       setError(err instanceof Error ? err.message : 'Failed to update invoice');
     } finally {
       setSubmitting(false);

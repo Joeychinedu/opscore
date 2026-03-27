@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { useAuthStore } from '@/lib/auth';
 import { PageHeader } from '@/components/layout/page-header';
@@ -49,8 +50,10 @@ export default function AccountPage() {
 
       setPassword('');
       setSuccess(true);
+      toast.success('Account updated');
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
+      toast.error('Failed to update account');
       setError(err instanceof Error ? err.message : 'Failed to update account');
     } finally {
       setSaving(false);

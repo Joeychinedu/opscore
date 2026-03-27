@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Plus, Trash2 } from 'lucide-react';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 
@@ -126,8 +127,10 @@ export default function NewInvoicePage() {
       if (notes.trim()) body.notes = notes.trim();
 
       const created = await api.post<{ id: string }>('/invoices', body);
+      toast.success('Invoice created');
       router.push(`/invoices/${created.id}`);
     } catch (err) {
+      toast.error('Failed to create invoice');
       setError(err instanceof Error ? err.message : 'Failed to create invoice');
     } finally {
       setSubmitting(false);

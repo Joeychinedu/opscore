@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Settings } from 'lucide-react';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 import { cn } from '@/lib/utils';
@@ -109,8 +110,10 @@ export default function SettingsPage() {
       });
       setSettings(data);
       setSuccess(true);
+      toast.success('Settings saved');
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
+      toast.error('Failed to save settings');
       setError(err instanceof Error ? err.message : 'Failed to save settings');
     } finally {
       setSaving(false);

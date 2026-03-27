@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 import { TableSkeleton } from '@/components/feedback/loading-skeleton';
@@ -65,8 +66,10 @@ export default function EditClientPage() {
       if (form.phone) body.phone = form.phone;
       if (form.address) body.address = form.address;
       await api.patch(`/clients/${params.id}`, body);
+      toast.success('Client updated');
       router.push(`/clients/${params.id}`);
     } catch (err) {
+      toast.error('Failed to update client');
       setError(err instanceof Error ? err.message : 'Failed to update client');
     } finally {
       setSubmitting(false);

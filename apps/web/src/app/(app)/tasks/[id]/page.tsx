@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Pencil, Calendar, User, FolderKanban } from 'lucide-react';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 import { StatusBadge } from '@/components/data/status-badge';
@@ -58,8 +59,9 @@ export default function TaskDetailPage() {
     try {
       const updated = await api.patch<TaskDetail>(`/tasks/${params.id}`, { status: newStatus });
       setTask((prev) => (prev ? { ...prev, status: updated.status ?? newStatus } : prev));
+      toast.success('Task updated');
     } catch {
-      // Silently fail
+      toast.error('Failed to update task');
     } finally {
       setUpdatingStatus(false);
     }

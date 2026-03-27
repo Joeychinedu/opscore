@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 
@@ -33,8 +34,10 @@ export default function NewClientPage() {
       if (form.phone) body.phone = form.phone;
       if (form.address) body.address = form.address;
       await api.post('/clients', body);
+      toast.success('Client created');
       router.push('/clients');
     } catch (err) {
+      toast.error('Failed to create client');
       setError(err instanceof Error ? err.message : 'Failed to create client');
     } finally {
       setSubmitting(false);

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 import { SettingsTabs } from '../page';
@@ -47,8 +48,10 @@ export default function BrandingPage() {
         brandColor: brandColor || null,
       });
       setSuccess(true);
+      toast.success('Branding saved');
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
+      toast.error('Failed to save branding');
       setError(err instanceof Error ? err.message : 'Failed to save settings');
     } finally {
       setSaving(false);

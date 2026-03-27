@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Pencil, Mail, Phone, MapPin, Building, Send } from 'lucide-react';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 import { StatusBadge } from '@/components/data/status-badge';
@@ -79,8 +80,9 @@ export default function ClientDetailPage() {
         prev ? { ...prev, notes: [note, ...prev.notes] } : prev,
       );
       setNoteText('');
+      toast.success('Note added');
     } catch {
-      // Silently fail
+      toast.error('Failed to add note');
     } finally {
       setAddingNote(false);
     }

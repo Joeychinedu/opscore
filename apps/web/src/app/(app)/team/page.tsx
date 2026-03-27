@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { UserPlus, Mail } from 'lucide-react';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 import { StatusBadge } from '@/components/data/status-badge';
@@ -56,11 +57,13 @@ export default function TeamPage() {
     setInviteError(null);
     try {
       await api.post('/members/invite', { email: inviteEmail, role: inviteRole });
+      toast.success('Invitation sent');
       setDialogOpen(false);
       setInviteEmail('');
       setInviteRole('MEMBER');
       fetchMembers();
     } catch (err) {
+      toast.error('Failed to send invite');
       setInviteError(err instanceof Error ? err.message : 'Failed to send invite');
     } finally {
       setInviting(false);

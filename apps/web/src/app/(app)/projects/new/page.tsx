@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import { PageHeader } from '@/components/layout/page-header';
 
@@ -61,8 +62,10 @@ export default function NewProjectPage() {
       if (form.dueDate) body.dueDate = form.dueDate;
       if (form.budget) body.budget = parseFloat(form.budget);
       await api.post('/projects', body);
+      toast.success('Project created');
       router.push('/projects');
     } catch (err) {
+      toast.error('Failed to create project');
       setError(err instanceof Error ? err.message : 'Failed to create project');
     } finally {
       setSubmitting(false);
