@@ -39,10 +39,10 @@ export default function LoginPage() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold text-gray-900">Sign in to your account</h2>
+      <h2 className="text-xl font-bold text-gray-900 tracking-tight">Sign in to your account</h2>
 
       {error && (
-        <div className="rounded-md bg-red-50 p-3 text-sm text-red-700">
+        <div className="rounded-xl bg-red-50/80 p-3 text-sm text-red-600">
           {error}
           <button onClick={clearError} className="ml-2 font-medium underline">
             Dismiss
@@ -61,7 +61,7 @@ export default function LoginPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="mt-1 block w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-300 placeholder-gray-400"
             placeholder="you@example.com"
           />
         </div>
@@ -76,7 +76,7 @@ export default function LoginPage() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="mt-1 block w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm bg-white shadow-xs focus:border-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-300 placeholder-gray-400"
             placeholder="Enter your password"
           />
         </div>
@@ -84,7 +84,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={submitting || isLoading}
-          className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+          className="w-full bg-gradient-to-t from-blue-600 to-blue-500 text-white rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:shadow-md transition-all disabled:opacity-50"
         >
           {submitting ? 'Signing in...' : 'Sign in'}
         </button>
@@ -92,10 +92,10 @@ export default function LoginPage() {
 
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-300" />
+          <div className="w-full border-t border-gray-200/60" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="bg-white px-2 text-gray-500">or</span>
+          <span className="bg-white/70 px-2 text-gray-500">or</span>
         </div>
       </div>
 
@@ -103,14 +103,14 @@ export default function LoginPage() {
         type="button"
         onClick={handleDemo}
         disabled={submitting || isLoading}
-        className="w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+        className="w-full bg-white text-gray-800 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm hover:bg-gray-50 transition-all disabled:opacity-50"
       >
         Try Demo
       </button>
 
-      <p className="text-center text-sm text-gray-600">
+      <p className="text-center text-sm text-gray-500">
         Don&apos;t have an account?{' '}
-        <Link href="/register" className="font-medium text-blue-600 hover:text-blue-500">
+        <Link href="/register" className="font-medium text-blue-500 hover:text-blue-600">
           Create one
         </Link>
       </p>

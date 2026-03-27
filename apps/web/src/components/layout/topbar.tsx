@@ -12,12 +12,17 @@ export function Topbar() {
 
   const handleLogout = () => { logout(); router.push('/login'); };
 
+  const initials = user ? `${user.firstName?.[0] || ''}${user.lastName?.[0] || ''}`.toUpperCase() : '';
+
   return (
-    <header className="h-14 border-b bg-white flex items-center justify-between px-6 fixed top-0 left-60 right-0 z-10">
-      <div className="text-sm text-gray-500">{currentOrg?.name || 'No workspace'}</div>
-      <div className="flex items-center gap-4">
-        <span className="text-sm text-gray-700">{user?.firstName} {user?.lastName}</span>
-        <button onClick={handleLogout} className="text-gray-400 hover:text-gray-600">
+    <header className="h-14 border-b border-gray-200/60 bg-white/80 backdrop-blur-sm flex items-center justify-between px-6 fixed top-0 left-60 right-0 z-10">
+      <div className="text-sm font-medium text-gray-600">{currentOrg?.name || 'No workspace'}</div>
+      <div className="flex items-center gap-3">
+        <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center">
+          <span className="text-xs font-medium text-white">{initials}</span>
+        </div>
+        <span className="text-sm font-medium text-gray-700">{user?.firstName} {user?.lastName}</span>
+        <button onClick={handleLogout} className="text-gray-400 hover:text-gray-600 transition-colors">
           <LogOut className="h-4 w-4" />
         </button>
       </div>
