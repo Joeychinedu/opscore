@@ -100,17 +100,16 @@ export default function DashboardPage() {
 
   if (!data) return null;
 
-  const tasksPieData = data.tasksByStatus.map((t) => ({
-    name: t.status.replace(/_/g, ' '),
-    value: t.count,
-    color: CHART_COLORS[t.status] || '#6b7280',
+  const tasksPieData = Object.entries(data.tasksByStatus || {}).map(([status, count]) => ({
+    name: status.replace(/_/g, ' '),
+    value: count as number,
+    color: CHART_COLORS[status] || '#6b7280',
   }));
 
-  const invoiceBarData = data.invoiceSummary.map((i) => ({
-    name: i.status.replace(/_/g, ' '),
-    count: i.count,
-    total: i.total,
-    fill: CHART_COLORS[i.status] || '#6b7280',
+  const invoiceBarData = Object.entries(data.invoiceSummary || {}).map(([status, count]) => ({
+    name: status.replace(/_/g, ' '),
+    count: count as number,
+    fill: CHART_COLORS[status] || '#6b7280',
   }));
 
   return (
