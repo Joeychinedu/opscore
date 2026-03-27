@@ -52,9 +52,9 @@ export default function InvoicesPage() {
       params.set('page', String(page));
       params.set('limit', '20');
       if (status) params.set('status', status);
-      const res = await api.get<{ data: Invoice[]; meta: Meta }>(`/invoices?${params}`);
-      setInvoices(res.data);
-      setMeta(res.meta);
+      const res = await api.get<any>(`/invoices?${params}`);
+      setInvoices(Array.isArray(res.data) ? res.data : Array.isArray(res) ? res : []);
+      setMeta(res.meta || null);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load invoices');
     } finally {
