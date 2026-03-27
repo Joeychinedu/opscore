@@ -4,34 +4,21 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/auth';
 import { useOrgStore } from '@/lib/hooks/use-org';
+import { AppShell } from '@/components/layout/app-shell';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
   const { user, isLoading: authLoading, init: initAuth } = useAuthStore();
   const { init: initOrg } = useOrgStore();
+  const router = useRouter();
 
+  useEffect(() => { initAuth(); initOrg(); }, []);
   useEffect(() => {
-    initAuth();
-    initOrg();
-  }, [initAuth, initOrg]);
-
-  useEffect(() => {
-    if (!authLoading && !user) {
-      router.push('/login');
-    }
+    if (!authLoading && !user) router.push('/login');
   }, [authLoading, user, router]);
 
-  if (authLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-gray-500">Loading...</div>
-      </div>
-    );
+  if (authLoading || !user) {
+    return <div className="min-h-screen flex items-center justify-center text-gray-400">Loading...</div>;
   }
 
-  if (!user) {
-    return null;
-  }
-
-  return <div className="min-h-screen bg-gray-50">{children}</div>;
+  return <AppShell>{children}</AppShell>;
 }
