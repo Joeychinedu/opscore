@@ -12,6 +12,7 @@ import { InvoicesModule } from './modules/invoices/invoices.module.js';
 import { DashboardModule } from './modules/dashboard/dashboard.module.js';
 import { ActivityModule } from './modules/activity/activity.module.js';
 import { ReportsModule } from './modules/reports/reports.module.js';
+import { SettingsModule } from './modules/settings/settings.module.js';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ReportsModule } from './modules/reports/reports.module.js';
     DashboardModule,
     ActivityModule,
     ReportsModule,
+    SettingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
